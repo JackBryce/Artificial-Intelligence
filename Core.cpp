@@ -2,46 +2,48 @@
 
 //This constructor runs the Core AI.
 Core::Core(int count) {
+	//Variables
 	KeyGenerator kg = new KeyGenerator();
+	AIs.push_back(new ArtificialIntelligence());
 	key = kg.generateKey(binary(count));
 	updatedKey = key;
 
-	setupCore();
+	//Processes
+	while (updatedKey == key) {
+		bool allMaxNetworks = false;
+		vector<bool> maxNetwork;
+		for (int i = 0; i < AIs.size(); i++) {
+			maxNetwork.push_back(false);
+		}
 
-	while (checkID()) {
+		/* --- 
+		   Check the amount of neural networks an AI has, if the AI has 16 neural networks then.
+		   --- */
+		vector<int> numNetworks;
+		for (int i = 0; i < AIs.size(); i++) {
+			numNetworks.push_back(AIs.networkDetails.size());
+			if (numNetworks[i] == 16) {
+				maxNetwork[i] = true;
+			}
+		}
 
+		for (int i = 0; i < maxNetwork.size(); i++) {
+			if (maxNetwork[i] == true) {
+				allMaxNetwork = true;
+			} else {
+				allMaxNetwork = false;
+			}
+		}
+
+		/* --- 
+		   If there are 16 AIs and one needs to be added, then create a core and then add the new AI to that core, else create a new AI in the current Core. 
+		   --- */
+		if (AIs.size() < 16 && allMaxNetwork == true) {
+			AIs.push_back(new ArtificialIntelligence());
+		} else if (AIs.size()+1 == 16 && subcore.size() < 16) {
+			subcore.push_back(new Core());
+		}
 	}
-}
-
-//This method creates the neural networks to assist the Dynamic Network Generator.
-void Core::setupCore() {
-	vector<vector<string>> textNetwork;
-	vector<string> layer;
-
-	textNetwork.push_back(layer);
-	for (int i = 0; i < 3; i++) {
-		textNetwork.back().push_back("ANNBlock");
-	}
-
-	textNetwork.push_back(layer);
-	textNetwork.back().push_back("RNNBlock");
-
-	textNetwork.push_back(layer);
-	for (int i = 0; i < 3; i++) {
-		textNetwork.back().push_back("ANNBlock");
-	}
-
-	_textNetwork = new DynamicNetworkGenerator textNetwork;
-}
-
-//This method compares the id with a potentially updated key.
-bool Core::checkID(string key) {
-	bool stayActive = true;
-	if (this.privateKey != privateKey) {
-		stayActive = false;
-	}
-
-	return stayActive;
 }
 
 //This method creates a binary string to generate a id for the AI and cores.
@@ -53,14 +55,4 @@ string Core::binary(int n) {
 	}
 
 	return binaryVal;
-}
-
-//This method creates a new core to handle the excess data and process the data.
-void Core::createSubcore() {
-	subcore.push_back(new Core());
-}
-
-//This method creates a new network to process the data.
-void Core::createAI() {
-
 }
