@@ -25,9 +25,14 @@ class ArtificialIntelligence {
 
 	private:
 		vector<threadDetails> networkDetails;
+		vector<string> filePaths;
+		vector<string> newFiles;
 		DynamicNetworkGenerator _textNetwork;
-		bool checkID();
 		string binary();
+		bool checkID();
+		void fileThread();
+		void networkThread();
+		void performanceThread();
 		void audioProcessing(fstream data);
 		void imageProcessing(fstream data);
 		void textProcessing(fstream data);
