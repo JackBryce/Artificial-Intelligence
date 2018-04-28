@@ -1,0 +1,22 @@
+First of all, before we get into the Contribution Guidelines, I would like to thank you for any help you have given and hopefully will
+give to this repository as it is truly appreciated.
+
+The contents of this file are mostly guidelines, not rules. If there is any changes you want to make to the guidelines, use your best
+judgement and feel free to purpose any changes to this document in a pull request.
+
+Pull Requests
+-------------
+* For the changes that you have made to system, create brief comments within the header/source file and write a full
+  description in a Word Document.
+  
+* The full description of your changes should include:
+  - The reason for the change and
+  - The results of any testing that has been carried out.
+  
+Issues
+------
+* Issues should include a description, how urgent the issue is and how quickly it should be add/changed to the repository
+  and a purposed outline to a solution.
+  
+* If within the repository you find any enhancements that can be made to the code or have found a compiler error or an issue with
+  performance please feel free to post an issue.
