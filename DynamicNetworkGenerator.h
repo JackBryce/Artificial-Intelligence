@@ -8,13 +8,22 @@
 
 using namespace std;
 
-template <typename T> Layer;
-class DynamicNetwork {
+class Layer {
 	public:
-		DynamicNetwork(const vector<vector<string>> *blockTypes);
-		void feedFoward(const vector<double> &data);
-		void backpropigation();
+		ANNBlock *ann;
+		RNNBlock *rnn;
+		LSTMBlock *lstm;
+		bool _ann = false;
+		bool _rnn = false;
+		bool _lstm = false;
+};
 
-	private:
-		vector<Layer> m_layer;
-}
+class DynamicNetworkGenerator {
+	public:
+		DynamicNetworkGenerator(const vector<vector<string>> &blockTypes);
+		void feedFoward(const vector<double> &data);
+		void backpropigation(const vector<double> &targets);
+		vector<vector<string>> performance();
+		vector<double> output;
+		vector<vector<Layer*>> m_layer;
+};

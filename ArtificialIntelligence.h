@@ -7,17 +7,21 @@
 
 using namespace std;
 
-struct DataSet {
-	string id;
-	vector<vector<double>> data;
+class DataSet {
+	public:
+		string id;
+		vector<double> memoryMatrixOutput;
+		vector<double> memoryMatrixInputS;		    //For Text and Audio.
+		vector<vector<double>> memoryMatrixInputL;  //For Images and Videos due to RGB.
 };
 
-struct threadDetails {
-	string id;
-	DynamicNetworkGenerator *network;
-	int dataSetsProcessed;
-	int dataSetsCollected;
-	bool active;
+class threadDetails {
+	public:
+		string id;
+		DynamicNetworkGenerator *network;
+		int dataSetsProcessed;
+		int dataSetsCollected;
+		bool active;
 };
 
 class ArtificialIntelligence {
@@ -29,15 +33,17 @@ class ArtificialIntelligence {
 		void addNetwork(int count, vector<vector<string>> networkSetup);
 		int networkSize() { return networkDetails.size(); }
 		string networkPerformance();
+		double activationFunction(double z) { return ((exp(z) - (exp(-z))) / ((exp(z) + (exp(-z))))); }
 
 	private:
 		vector<threadDetails*> networkDetails;
+		vector<DataSet*> dataSets;
 		vector<string> filePaths;
 		vector<string> newFiles;
-		DynamicNetworkGenerator *_audioNetwork;
-		DynamicNetworkGenerator *_imageNetwork;
-		DynamicNetworkGenerator *_textNetwork;
-		DynamicNetworkGenerator *_videoNetwork;
+		DynamicNetworkGenerator* _audioNetwork;
+		DynamicNetworkGenerator* _imageNetwork;
+		DynamicNetworkGenerator* _textNetwork;
+		DynamicNetworkGenerator* _videoNetwork;
 		string binary();
 		void setupAI();
 		bool checkID();
