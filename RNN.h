@@ -3,8 +3,8 @@
 
 class RNNBlock : public Block {
 	public:
-		RNNBlock();
-		void feedFoward(double data);
+		RNNBlock(int nextLayerSize);
+		vector<double> feedFoward(double data);
 		double getValue();
 		double activationFunction(double z) { return ((exp(z) - (exp(-z))) / ((exp(z) + (exp(-z))))); }
 

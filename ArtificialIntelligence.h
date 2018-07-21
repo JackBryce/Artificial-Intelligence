@@ -1,19 +1,12 @@
 #pragma once
 #include "DynamicNetworkGenerator.cpp";
+#include "DataSet.h";
 #include <vector>;
 #include <iostream>;
 #include <fstream>;
 #include <string>;
 
 using namespace std;
-
-class DataSet {
-	public:
-		string id;
-		vector<double> memoryMatrixOutput;
-		vector<double> memoryMatrixInputS;		    //For Text and Audio.
-		vector<vector<double>> memoryMatrixInputL;  //For Images and Videos due to RGB.
-};
 
 class threadDetails {
 	public:
@@ -28,18 +21,22 @@ class ArtificialIntelligence {
 	public:
 		string id;
 		string updatedKey;
+		int dsProcessedTotal;
 		ArtificialIntelligence(int count);
 		void runNetwork(fstream data, string dataType);
 		void addNetwork(int count, vector<vector<string>> networkSetup);
 		int networkSize() { return networkDetails.size(); }
 		string networkPerformance();
 		double activationFunction(double z) { return ((exp(z) - (exp(-z))) / ((exp(z) + (exp(-z))))); }
+		int dataSetsSize() { return dataSets.size(); }
+		vector<int> change;
 
 	private:
 		vector<threadDetails*> networkDetails;
 		vector<DataSet*> dataSets;
 		vector<string> filePaths;
 		vector<string> newFiles;
+		DynamicNetworkGenerator* _networkGenerator;
 		DynamicNetworkGenerator* _audioNetwork;
 		DynamicNetworkGenerator* _imageNetwork;
 		DynamicNetworkGenerator* _textNetwork;

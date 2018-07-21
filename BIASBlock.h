@@ -1,11 +1,10 @@
 #pragma once
-#include "Block.cpp";
+#include "block.cpp";
 
-class ANNBlock : public Block {
+class BIASBlock : public Block {
 	public:
-		ANNBlock(int nextLayerSize);
-		vector<double> feedFoward(double data);
-		double getValue();
+		BIASBlock(int nextLayerSize);
+		double getValue() { return value; }
 		double activationFunction(double z) { return ((exp(z) - (exp(-z))) / ((exp(z) + (exp(-z))))); }
 
 	private:

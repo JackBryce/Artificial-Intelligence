@@ -3,8 +3,8 @@
 
 class LSTMBlock : public Block {
 	public:
-		LSTMBlock();
-		void feedFoward(double data);
+		LSTMBlock(int nextLayerSize);
+		vector<double> feedFoward(double data);
 		double getValue();
 		double getOutput() { return output; }
 		double activationFunction(double z) { return ((exp(z) - (exp(-z))) / ((exp(z) + (exp(-z))))); }

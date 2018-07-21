@@ -11,7 +11,7 @@ Network::Network() {
 
 //This method adds a node to the network.
 void Network::addNode() {
-	if (nodes.size() != 65535) {
+	if (nodes.size() != 65536) {
 		Node *n = new Node();
 		n->id = bitset<16>(nodes.size() + 1).to_string();
 		n->AI_ID.push_back(bitset<2>(0).to_string());
@@ -46,6 +46,7 @@ int Network::getNodesSize() {
 	return nodes.size();
 }
 
+//Exception Thrown || Vector subscript is out of range
 Node* Network::getNode(int i) {
 	return nodes[i];
 }
